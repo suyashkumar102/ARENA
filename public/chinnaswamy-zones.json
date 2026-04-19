@@ -1,0 +1,243 @@
+[
+  {
+    "id": "north-stand",
+    "name": "North Stand (Cubbon Park End)",
+    "label": "North Stand",
+    "polygon": [
+      { "lat": 12.9806, "lng": 77.5986 },
+      { "lat": 12.9810, "lng": 77.5990 },
+      { "lat": 12.9812, "lng": 77.5996 },
+      { "lat": 12.9810, "lng": 77.6002 },
+      { "lat": 12.9806, "lng": 77.6006 },
+      { "lat": 12.9802, "lng": 77.6006 },
+      { "lat": 12.9800, "lng": 77.6002 },
+      { "lat": 12.9800, "lng": 77.5990 },
+      { "lat": 12.9802, "lng": 77.5986 }
+    ]
+  },
+  {
+    "id": "south-stand",
+    "name": "South Stand (KSCA End)",
+    "label": "South Stand",
+    "polygon": [
+      { "lat": 12.9778, "lng": 77.5986 },
+      { "lat": 12.9774, "lng": 77.5990 },
+      { "lat": 12.9772, "lng": 77.5996 },
+      { "lat": 12.9774, "lng": 77.6002 },
+      { "lat": 12.9778, "lng": 77.6006 },
+      { "lat": 12.9782, "lng": 77.6006 },
+      { "lat": 12.9784, "lng": 77.6002 },
+      { "lat": 12.9784, "lng": 77.5990 },
+      { "lat": 12.9782, "lng": 77.5986 }
+    ]
+  },
+  {
+    "id": "east-stand",
+    "name": "East Stand (Chinnaswamy Side)",
+    "label": "East Stand",
+    "polygon": [
+      { "lat": 12.9800, "lng": 77.6004 },
+      { "lat": 12.9796, "lng": 77.6010 },
+      { "lat": 12.9792, "lng": 77.6012 },
+      { "lat": 12.9788, "lng": 77.6010 },
+      { "lat": 12.9784, "lng": 77.6004 },
+      { "lat": 12.9784, "lng": 77.6000 },
+      { "lat": 12.9788, "lng": 77.6002 },
+      { "lat": 12.9792, "lng": 77.6004 },
+      { "lat": 12.9796, "lng": 77.6002 },
+      { "lat": 12.9800, "lng": 77.6000 }
+    ]
+  },
+  {
+    "id": "west-stand",
+    "name": "West Stand (Members Pavilion)",
+    "label": "West Stand",
+    "polygon": [
+      { "lat": 12.9800, "lng": 77.5988 },
+      { "lat": 12.9796, "lng": 77.5982 },
+      { "lat": 12.9792, "lng": 77.5980 },
+      { "lat": 12.9788, "lng": 77.5982 },
+      { "lat": 12.9784, "lng": 77.5988 },
+      { "lat": 12.9784, "lng": 77.5992 },
+      { "lat": 12.9788, "lng": 77.5990 },
+      { "lat": 12.9792, "lng": 77.5988 },
+      { "lat": 12.9796, "lng": 77.5990 },
+      { "lat": 12.9800, "lng": 77.5992 }
+    ]
+  },
+  {
+    "id": "north-concourse",
+    "name": "North Concourse",
+    "label": "N Concourse",
+    "polygon": [
+      { "lat": 12.9812, "lng": 77.5982 },
+      { "lat": 12.9816, "lng": 77.5988 },
+      { "lat": 12.9818, "lng": 77.5996 },
+      { "lat": 12.9816, "lng": 77.6004 },
+      { "lat": 12.9812, "lng": 77.6010 },
+      { "lat": 12.9810, "lng": 77.6010 },
+      { "lat": 12.9810, "lng": 77.6002 },
+      { "lat": 12.9812, "lng": 77.5996 },
+      { "lat": 12.9810, "lng": 77.5990 },
+      { "lat": 12.9810, "lng": 77.5982 }
+    ]
+  },
+  {
+    "id": "south-concourse",
+    "name": "South Concourse",
+    "label": "S Concourse",
+    "polygon": [
+      { "lat": 12.9772, "lng": 77.5982 },
+      { "lat": 12.9768, "lng": 77.5988 },
+      { "lat": 12.9766, "lng": 77.5996 },
+      { "lat": 12.9768, "lng": 77.6004 },
+      { "lat": 12.9772, "lng": 77.6010 },
+      { "lat": 12.9774, "lng": 77.6010 },
+      { "lat": 12.9774, "lng": 77.6002 },
+      { "lat": 12.9772, "lng": 77.5996 },
+      { "lat": 12.9774, "lng": 77.5990 },
+      { "lat": 12.9774, "lng": 77.5982 }
+    ]
+  },
+  {
+    "id": "gate-a",
+    "name": "Gate A (North)",
+    "label": "Gate A",
+    "polygon": [
+      { "lat": 12.9818, "lng": 77.5992 },
+      { "lat": 12.9821, "lng": 77.5994 },
+      { "lat": 12.9821, "lng": 77.5998 },
+      { "lat": 12.9818, "lng": 77.6000 },
+      { "lat": 12.9816, "lng": 77.5996 }
+    ]
+  },
+  {
+    "id": "gate-b",
+    "name": "Gate B (East)",
+    "label": "Gate B",
+    "polygon": [
+      { "lat": 12.9795, "lng": 77.6015 },
+      { "lat": 12.9792, "lng": 77.6018 },
+      { "lat": 12.9789, "lng": 77.6015 },
+      { "lat": 12.9789, "lng": 77.6012 },
+      { "lat": 12.9792, "lng": 77.6013 },
+      { "lat": 12.9795, "lng": 77.6012 }
+    ]
+  },
+  {
+    "id": "gate-c",
+    "name": "Gate C (South)",
+    "label": "Gate C",
+    "polygon": [
+      { "lat": 12.9766, "lng": 77.5992 },
+      { "lat": 12.9763, "lng": 77.5994 },
+      { "lat": 12.9763, "lng": 77.5998 },
+      { "lat": 12.9766, "lng": 77.6000 },
+      { "lat": 12.9768, "lng": 77.5996 }
+    ]
+  },
+  {
+    "id": "gate-d",
+    "name": "Gate D (West)",
+    "label": "Gate D",
+    "polygon": [
+      { "lat": 12.9795, "lng": 77.5977 },
+      { "lat": 12.9792, "lng": 77.5974 },
+      { "lat": 12.9789, "lng": 77.5977 },
+      { "lat": 12.9789, "lng": 77.5980 },
+      { "lat": 12.9792, "lng": 77.5979 },
+      { "lat": 12.9795, "lng": 77.5980 }
+    ]
+  },
+  {
+    "id": "concession-n1",
+    "name": "North Food Court 1",
+    "label": "N Food Ct 1",
+    "polygon": [
+      { "lat": 12.9816, "lng": 77.5984 },
+      { "lat": 12.9818, "lng": 77.5986 },
+      { "lat": 12.9818, "lng": 77.5992 },
+      { "lat": 12.9816, "lng": 77.5994 },
+      { "lat": 12.9814, "lng": 77.5992 },
+      { "lat": 12.9814, "lng": 77.5986 }
+    ]
+  },
+  {
+    "id": "concession-n2",
+    "name": "North Food Court 2",
+    "label": "N Food Ct 2",
+    "polygon": [
+      { "lat": 12.9816, "lng": 77.5996 },
+      { "lat": 12.9818, "lng": 77.5998 },
+      { "lat": 12.9818, "lng": 77.6002 },
+      { "lat": 12.9816, "lng": 77.6004 },
+      { "lat": 12.9814, "lng": 77.6002 },
+      { "lat": 12.9814, "lng": 77.5998 }
+    ]
+  },
+  {
+    "id": "concession-n3",
+    "name": "North Beverage Stall",
+    "label": "N Beverage",
+    "polygon": [
+      { "lat": 12.9816, "lng": 77.6006 },
+      { "lat": 12.9818, "lng": 77.6008 },
+      { "lat": 12.9818, "lng": 77.6012 },
+      { "lat": 12.9816, "lng": 77.6014 },
+      { "lat": 12.9814, "lng": 77.6012 },
+      { "lat": 12.9814, "lng": 77.6008 }
+    ]
+  },
+  {
+    "id": "concession-s1",
+    "name": "South Food Court 1",
+    "label": "S Food Ct 1",
+    "polygon": [
+      { "lat": 12.9770, "lng": 77.5986 },
+      { "lat": 12.9768, "lng": 77.5988 },
+      { "lat": 12.9768, "lng": 77.5994 },
+      { "lat": 12.9770, "lng": 77.5996 },
+      { "lat": 12.9772, "lng": 77.5994 },
+      { "lat": 12.9772, "lng": 77.5988 }
+    ]
+  },
+  {
+    "id": "concession-s2",
+    "name": "South Food Court 2",
+    "label": "S Food Ct 2",
+    "polygon": [
+      { "lat": 12.9770, "lng": 77.6000 },
+      { "lat": 12.9768, "lng": 77.6002 },
+      { "lat": 12.9768, "lng": 77.6008 },
+      { "lat": 12.9770, "lng": 77.6010 },
+      { "lat": 12.9772, "lng": 77.6008 },
+      { "lat": 12.9772, "lng": 77.6002 }
+    ]
+  },
+  {
+    "id": "medical-bay",
+    "name": "Medical Bay",
+    "label": "Medical Bay",
+    "polygon": [
+      { "lat": 12.9796, "lng": 77.5974 },
+      { "lat": 12.9798, "lng": 77.5976 },
+      { "lat": 12.9798, "lng": 77.5980 },
+      { "lat": 12.9796, "lng": 77.5982 },
+      { "lat": 12.9794, "lng": 77.5980 },
+      { "lat": 12.9794, "lng": 77.5976 }
+    ]
+  },
+  {
+    "id": "vip-lounge",
+    "name": "VIP Lounge (Members Pavilion)",
+    "label": "VIP Lounge",
+    "polygon": [
+      { "lat": 12.9791, "lng": 77.5974 },
+      { "lat": 12.9793, "lng": 77.5976 },
+      { "lat": 12.9793, "lng": 77.5980 },
+      { "lat": 12.9791, "lng": 77.5982 },
+      { "lat": 12.9789, "lng": 77.5980 },
+      { "lat": 12.9789, "lng": 77.5976 }
+    ]
+  }
+]

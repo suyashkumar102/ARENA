@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
       throw new Error('Firebase Admin not initialized');
     }
 
-    const eventId = 'wankhede-2026-mi-csk';
+    const eventId = 'chinnaswamy-2026-rcb-mi';
     const messagesRef = adminDb.ref(`arena/${eventId}/fanMessages`);
     const newMessageRef = messagesRef.push();
 
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
     // FCM push notification
     let fcmSent = false;
     if (adminMessaging) {
-      const topic = targetZone === 'all' ? 'arena-wankhede-fans' : `arena-wankhede-${targetZone}`;
+      const topic = targetZone === 'all' ? 'arena-chinnaswamy-fans' : `arena-chinnaswamy-${targetZone}`;
       try {
         await adminMessaging.send({
           topic,

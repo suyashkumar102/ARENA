@@ -44,7 +44,7 @@ if (typeof window !== 'undefined' && app) {
  * Subscribe the current device to a fan FCM topic.
  * In production: POST token to server, server calls adminMessaging.subscribeToTopic(token, topic)
  */
-export async function subscribeToFanTopic(topic: string = 'arena-wankhede-fans'): Promise<void> {
+export async function subscribeToFanTopic(topic: string = 'arena-chinnaswamy-fans'): Promise<void> {
   if (!messaging) {
     console.warn('[FCM] Messaging not supported on this device/browser');
     return;

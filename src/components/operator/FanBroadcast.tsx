@@ -5,7 +5,7 @@ export default function FanBroadcast() {
   const [msg, setMsg] = useState('');
   const [zone, setZone] = useState('all');
   const [sent, setSent] = useState<{msg: string, time: Date}[]>([
-    { msg: 'Welcome to Wankhede! Enjoy the game.', time: new Date(Date.now() - 3600000) }
+    { msg: 'Welcome to Chinnaswamy! Enjoy the RCB vs MI clash.', time: new Date(Date.now() - 3600000) }
   ]);
 
   const handleSend = async () => {

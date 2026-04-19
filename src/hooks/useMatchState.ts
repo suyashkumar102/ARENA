@@ -40,7 +40,7 @@ export function useMatchState(): MatchState {
       import('firebase/database').then(({ ref, onValue }) => {
         import('@/lib/firebase').then(({ db, isFirebaseConfigured: configured }) => {
           if (!configured || !db) return;
-          const stateRef = ref(db, 'arena/wankhede-2026-mi-csk/matchState');
+          const stateRef = ref(db, 'arena/chinnaswamy-2026-rcb-mi/matchState');
           unsubscribe = onValue(
             stateRef,
             (snapshot) => {

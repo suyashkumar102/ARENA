@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
       createdAt: Date.now(),
     };
 
-    const eventId = 'wankhede-2026-mi-csk'; // Using the demo event
+    const eventId = 'chinnaswamy-2026-rcb-mi';
     const executedCascade = await executeCascadeSequence(cascade, eventId);
 
     const executedActions = executedCascade.actions;

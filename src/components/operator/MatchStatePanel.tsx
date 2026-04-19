@@ -13,9 +13,9 @@ export default function MatchStatePanel() {
       <div className="flex flex-col">
         <div className="flex items-center gap-3 mb-1">
           <LiveBadge />
-          <span className="text-slate-400 text-sm">Wankhede Stadium</span>
+          <span className="text-slate-400 text-sm">Chinnaswamy Stadium, Bangalore</span>
         </div>
-        <div className="text-2xl font-bold font-mono-numbers">MI vs CSK</div>
+        <div className="text-2xl font-bold font-mono-numbers">RCB vs MI</div>
       </div>
 
       {/* Center: Score & Overs */}
@@ -25,7 +25,7 @@ export default function MatchStatePanel() {
           <div className="text-3xl font-mono-numbers font-bold text-white">{matchState.over}.{matchState.ball}</div>
         </div>
         <div className="text-center">
-          <div className="text-slate-400 text-xs uppercase tracking-wider mb-1">MI Score</div>
+          <div className="text-slate-400 text-xs uppercase tracking-wider mb-1">RCB Score</div>
           <div className="text-3xl font-mono-numbers font-bold text-white">{matchState.scoreTeam1}/{matchState.wicketsTeam1}</div>
         </div>
       </div>

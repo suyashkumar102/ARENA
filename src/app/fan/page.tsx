@@ -11,8 +11,8 @@ export default function FanPage() {
             <LiveBadge label="ARENA" />
           </div>
           <div className="text-right flex flex-col items-end">
-            <span className="text-xs font-bold text-slate-300">Wankhede</span>
-            <span className="text-[10px] text-slate-500 font-mono-numbers">MI vs CSK</span>
+            <span className="text-xs font-bold text-slate-300">Chinnaswamy</span>
+            <span className="text-[10px] text-slate-500 font-mono-numbers">RCB vs MI</span>
           </div>
         </header>
         

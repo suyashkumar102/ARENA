@@ -70,7 +70,7 @@ export default function StaffMap() {
         const { db, isFirebaseConfigured } = await import('@/lib/firebase');
         if (!isFirebaseConfigured || !db) return;
         const { ref, onValue } = await import('firebase/database');
-        const staffRef = ref(db, 'arena/wankhede-2026-mi-csk/staff');
+        const staffRef = ref(db, 'arena/chinnaswamy-2026-rcb-mi/staff');
         unsubscribe = onValue(staffRef, (snapshot) => {
           if (snapshot.exists()) {
             const data = snapshot.val() as Record<string, StaffMember>;

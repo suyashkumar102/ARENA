@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
     };
 
     if (adminDb) {
-      const incidentRef = adminDb.ref(`arena/wankhede-2026-mi-csk/incidents/${id}`);
+      const incidentRef = adminDb.ref(`arena/chinnaswamy-2026-rcb-mi/incidents/${id}`);
       await incidentRef.set(incident);
     } else {
       console.warn('[Incident API] adminDb not initialized — incident not persisted to Firebase');

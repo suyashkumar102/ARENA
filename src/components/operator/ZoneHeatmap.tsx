@@ -32,7 +32,7 @@ function GoogleMapView({ zones }: { zones: Record<ZoneId, Zone> }) {
     const polygons = polygonsRef.current;
 
     const map = new google.maps.Map(mapRef.current, {
-      center: { lat: 18.9388, lng: 72.8258 },
+      center: { lat: 12.9792, lng: 77.5996 },
       zoom: 17,
       mapTypeId: 'satellite',
       disableDefaultUI: true,
@@ -41,7 +41,7 @@ function GoogleMapView({ zones }: { zones: Record<ZoneId, Zone> }) {
     mapInstanceRef.current = map;
     infoWindowRef.current = new google.maps.InfoWindow();
 
-    fetch('/wankhede-zones.json')
+    fetch('/chinnaswamy-zones.json')
       .then(r => r.json())
       .then((data: WankhedeZone[]) => {
         zoneDataRef.current = data;
@@ -81,7 +81,7 @@ function GoogleMapView({ zones }: { zones: Record<ZoneId, Zone> }) {
           polygons.set(zone.id, polygon);
         });
       })
-      .catch(err => console.warn('Failed to load wankhede-zones.json:', err));
+      .catch(err => console.warn('Failed to load chinnaswamy-zones.json:', err));
 
     return () => {
       polygons.forEach(p => p.setMap(null));
@@ -103,7 +103,7 @@ function GoogleMapView({ zones }: { zones: Record<ZoneId, Zone> }) {
     <div
       ref={mapRef}
       className="w-full h-full"
-      aria-label="Wankhede Stadium zone map"
+      aria-label="Chinnaswamy Stadium zone map"
       role="img"
     />
   );

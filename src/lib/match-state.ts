@@ -3,24 +3,23 @@ import { MatchState } from '@/types/arena.types';
 export const getDemoMatchState = (): MatchState => {
   return {
     phase: 'powerplay-1',
-    over: 14,
-    ball: 3,
-    scoreTeam1: 98,
-    wicketsTeam1: 2,
+    over: 7,
+    ball: 2,
+    scoreTeam1: 54,
+    wicketsTeam1: 1,
     scoreTeam2: 0,
     wicketsTeam2: 0,
-    tensionIndex: 62,
+    tensionIndex: 71,
     lastEvent: {
-      type: 'four',
-      timestamp: Date.now() - 30000,
-      description: 'Four down the ground'
+      type: 'six',
+      timestamp: Date.now() - 15000,
+      description: 'SIX! Virat pulls it over mid-wicket'
     },
-    timeToNextPhaseMs: 22 * 60 * 1000 // ~22 mins
+    timeToNextPhaseMs: 18 * 60 * 1000 // ~18 mins to end of powerplay
   };
 };
 
 export const simulateMatchProgress = (currentState: MatchState): MatchState => {
-  // Demo mode: just mock some progress if needed
   return {
     ...currentState,
     ball: currentState.ball === 6 ? 1 : currentState.ball + 1,

@@ -12,7 +12,7 @@ export default function FanCompanion() {
   }, []);
 
   const [messages] = useState([
-    { id: '1', body: 'Welcome to Wankhede! North gates are now open for entry.', time: '14:00' },
+    { id: '1', body: 'Welcome to Chinnaswamy! North gates are now open for entry.', time: '14:00' },
     { id: '2', body: 'Expect a surge at concourses during the innings break. Grab your snacks early.', time: '14:30' }
   ]);
 
