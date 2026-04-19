@@ -28,53 +28,58 @@ export function useFirebaseZones() {
   const [zones, setZones] = useState<Record<ZoneId, Zone>>(DEMO_ZONES);
 
   useEffect(() => {
-    if (!isFirebaseConfigured) {
-      // Demo mode: simulate live zone fluctuations every 4 seconds
-      setZones(DEMO_ZONES);
+    let unsubscribe: (() => void) | undefined;
+    let simInterval: ReturnType<typeof setInterval> | undefined;
 
-      const simulateTick = () => {
+    const startSimulation = () => {
+      if (simInterval) return; // already running
+      simInterval = setInterval(() => {
         setZones(prev => {
           const updated = { ...prev };
-          // Randomly fluctuate 3-4 zones per tick to look live
           const zoneIds = Object.keys(updated) as ZoneId[];
           const toUpdate = zoneIds.sort(() => Math.random() - 0.5).slice(0, 4);
-
           toUpdate.forEach(id => {
             const zone = { ...updated[id] };
-            // Small random delta: ±1-3% of capacity
             const delta = Math.floor((Math.random() - 0.45) * zone.capacity * 0.03);
             zone.current = Math.max(0, Math.min(zone.capacity, zone.current + delta));
             const pct = zone.current / zone.capacity;
             zone.status = pct >= 0.9 ? 'critical' : pct >= 0.75 ? 'busy' : pct >= 0.5 ? 'moderate' : 'clear';
-            // Queue time fluctuates slightly
             zone.queueMinutes = Math.max(0, zone.queueMinutes + Math.floor(Math.random() * 3) - 1);
             zone.lastUpdated = Date.now();
             updated[id] = zone;
           });
           return updated;
         });
-      };
+      }, 4000);
+    };
 
-      const interval = setInterval(simulateTick, 4000);
-      return () => clearInterval(interval);
+    if (!isFirebaseConfigured) {
+      // No Firebase — run simulation immediately
+      startSimulation();
+      return () => { if (simInterval) clearInterval(simInterval); };
     }
 
-    // Live Firebase subscription
-    let unsubscribe: (() => void) | undefined;
-
+    // Firebase configured — subscribe, but fall back to simulation if no data
     import('firebase/database').then(({ ref, onValue }) => {
-      import('@/lib/firebase').then(({ db, isFirebaseConfigured }) => {
-        if (!isFirebaseConfigured || !db) return;
+      import('@/lib/firebase').then(({ db, isFirebaseConfigured: configured }) => {
+        if (!configured || !db) { startSimulation(); return; }
         const zonesRef = ref(db, 'arena/wankhede-2026-mi-csk/zones');
         unsubscribe = onValue(
           zonesRef,
           (snapshot) => {
             const data = snapshot.val();
-            setZones(data ?? DEMO_ZONES);
+            if (data) {
+              // Real data exists — stop simulation, use Firebase
+              if (simInterval) { clearInterval(simInterval); simInterval = undefined; }
+              setZones(data);
+            } else {
+              // Firebase connected but no data — run simulation
+              startSimulation();
+            }
           },
           (error) => {
-            console.warn('Firebase zones error, falling back to demo:', error);
-            setZones(DEMO_ZONES);
+            console.warn('Firebase zones error, falling back to simulation:', error);
+            startSimulation();
           }
         );
       });
@@ -82,8 +87,9 @@ export function useFirebaseZones() {
 
     return () => {
       if (unsubscribe) unsubscribe();
+      if (simInterval) clearInterval(simInterval);
     };
-  }, []); // isFirebaseConfigured is a module-level constant, safe to omit
+  }, []);
 
   return zones;
 }
