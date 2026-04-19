@@ -3,8 +3,6 @@
 > "A venue director managing 60,000 people has less real-time intelligence  
 > than a delivery manager handling 200 orders. ARENA fixes that."
 
-[![Deploy on Cloud Run](https://img.shields.io/badge/Deploy%20on-Cloud%20Run-4285F4?logo=google-cloud)](YOUR_CLOUD_RUN_URL)
-
 ## What Is ARENA?
 
 ARENA is a real-time stadium operations intelligence platform that gives venue  
@@ -43,14 +41,10 @@ The result: 85–91% prediction confidence at 10 minutes ahead.
 
 ## Live Demo
 
-- **Operator Dashboard:** YOUR_CLOUD_RUN_URL/operator  
+- **Operator Dashboard:**   
   *Login: demo@arena.app / demo1234*
-- **Fan PWA:** YOUR_CLOUD_RUN_URL/fan  
+- **Fan PWA:**   
   *(QR code on demo page — no install required)*
-
-## Built With
-
-Next.js 14 + TypeScript + Firebase + Gemini + Tailwind CSS
 
 ## Business Model
 
