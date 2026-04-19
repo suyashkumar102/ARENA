@@ -67,7 +67,8 @@ export default function StaffMap() {
 
     (async () => {
       try {
-        const { db } = await import('@/lib/firebase');
+        const { db, isFirebaseConfigured } = await import('@/lib/firebase');
+        if (!isFirebaseConfigured || !db) return;
         const { ref, onValue } = await import('firebase/database');
         const staffRef = ref(db, 'arena/wankhede-2026-mi-csk/staff');
         unsubscribe = onValue(staffRef, (snapshot) => {

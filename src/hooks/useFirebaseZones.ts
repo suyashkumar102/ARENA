@@ -38,7 +38,8 @@ export function useFirebaseZones() {
     let unsubscribe: (() => void) | undefined;
 
     import('firebase/database').then(({ ref, onValue }) => {
-      import('@/lib/firebase').then(({ db }) => {
+      import('@/lib/firebase').then(({ db, isFirebaseConfigured }) => {
+        if (!isFirebaseConfigured || !db) return;
         const zonesRef = ref(db, 'arena/wankhede-2026-mi-csk/zones');
         unsubscribe = onValue(
           zonesRef,
