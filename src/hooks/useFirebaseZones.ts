@@ -28,10 +28,35 @@ export function useFirebaseZones() {
   const [zones, setZones] = useState<Record<ZoneId, Zone>>(DEMO_ZONES);
 
   useEffect(() => {
-    // Use demo data when Firebase isn't configured (no real keys)
     if (!isFirebaseConfigured) {
+      // Demo mode: simulate live zone fluctuations every 4 seconds
       setZones(DEMO_ZONES);
-      return;
+
+      const simulateTick = () => {
+        setZones(prev => {
+          const updated = { ...prev };
+          // Randomly fluctuate 3-4 zones per tick to look live
+          const zoneIds = Object.keys(updated) as ZoneId[];
+          const toUpdate = zoneIds.sort(() => Math.random() - 0.5).slice(0, 4);
+
+          toUpdate.forEach(id => {
+            const zone = { ...updated[id] };
+            // Small random delta: ±1-3% of capacity
+            const delta = Math.floor((Math.random() - 0.45) * zone.capacity * 0.03);
+            zone.current = Math.max(0, Math.min(zone.capacity, zone.current + delta));
+            const pct = zone.current / zone.capacity;
+            zone.status = pct >= 0.9 ? 'critical' : pct >= 0.75 ? 'busy' : pct >= 0.5 ? 'moderate' : 'clear';
+            // Queue time fluctuates slightly
+            zone.queueMinutes = Math.max(0, zone.queueMinutes + Math.floor(Math.random() * 3) - 1);
+            zone.lastUpdated = Date.now();
+            updated[id] = zone;
+          });
+          return updated;
+        });
+      };
+
+      const interval = setInterval(simulateTick, 4000);
+      return () => clearInterval(interval);
     }
 
     // Live Firebase subscription
