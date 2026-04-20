@@ -21,7 +21,7 @@ describe('PredictionEngine', () => {
   } as Record<ZoneId, Zone>;
 
   test('predicts high concourse density during innings break', () => {
-    const state = { ...mockMatchState, phase: 'death-overs-1' }; // Next phase will be innings-break
+    const state = { ...mockMatchState, phase: 'death-overs-1' as const }; // Next phase will be innings-break
     const preds = generatePredictions(mockZones, state, 10);
     const concoursePred = preds.find(p => p.zoneId === 'north-concourse');
     // Innings break pattern is 0.85
@@ -31,7 +31,7 @@ describe('PredictionEngine', () => {
   });
 
   test('predicts low movement during death overs close match', () => {
-    const state = { ...mockMatchState, phase: 'middle-overs' }; // Next phase is death-overs-1
+    const state = { ...mockMatchState, phase: 'middle-overs' as const }; // Next phase is death-overs-1
     const preds = generatePredictions(mockZones, state, 10);
     const concoursePred = preds.find(p => p.zoneId === 'north-concourse');
     const expectedFill = 1000 * 0.05;

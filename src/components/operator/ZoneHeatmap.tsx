@@ -109,42 +109,144 @@ function GoogleMapView({ zones }: { zones: Record<ZoneId, Zone> }) {
   );
 }
 
-// SVG Fallback (existing implementation)
+const STATUS_BAR: Record<ZoneStatus, string> = {
+  clear: 'bg-green-500',
+  moderate: 'bg-amber-500',
+  busy: 'bg-orange-500',
+  critical: 'bg-red-500',
+};
+
+const STATUS_RING: Record<ZoneStatus, string> = {
+  clear: 'border-green-500/60 bg-green-500/10',
+  moderate: 'border-amber-500/60 bg-amber-500/10',
+  busy: 'border-orange-500/60 bg-orange-500/10',
+  critical: 'border-red-500/60 bg-red-500/10 animate-pulse',
+};
+
+const STATUS_TEXT: Record<ZoneStatus, string> = {
+  clear: 'text-green-400',
+  moderate: 'text-amber-400',
+  busy: 'text-orange-400',
+  critical: 'text-red-400',
+};
+
+function ZoneChip({ zone }: { zone: Zone }) {
+  const pct = Math.round((zone.current / zone.capacity) * 100);
+  const status = zone.status ?? 'clear';
+  return (
+    <div className={`border rounded px-2 py-1.5 flex flex-col gap-1 transition-colors duration-500 ${STATUS_RING[status]}`}>
+      <div className="flex justify-between items-center gap-2">
+        <span className="text-[9px] font-bold text-slate-300 uppercase tracking-wider truncate max-w-[80px]">
+          {zone.name.split(' ').slice(0, 2).join(' ')}
+        </span>
+        <span className={`text-[9px] font-bold uppercase ${STATUS_TEXT[status]}`}>{status}</span>
+      </div>
+      <div className="h-1 w-full bg-slate-700 rounded-full overflow-hidden">
+        <div
+          className={`h-full rounded-full transition-all duration-500 ${STATUS_BAR[status]}`}
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+      <div className="flex justify-between text-[8px] text-slate-500">
+        <span>{pct}% full</span>
+        {zone.queueMinutes > 0 && <span>{zone.queueMinutes}m queue</span>}
+      </div>
+    </div>
+  );
+}
+
+// SVG Fallback — stadium schematic with live zone data
 function SVGFallback({ zones }: { zones: Record<ZoneId, Zone> }) {
-  const getStatusColor = (status: ZoneStatus) => {
-    switch (status) {
-      case 'clear': return 'bg-green-500/80 border-green-400';
-      case 'moderate': return 'bg-amber-500/80 border-amber-400';
-      case 'busy': return 'bg-orange-500/80 border-orange-400';
-      case 'critical': return 'bg-red-500/80 border-red-400 animate-pulse';
-      default: return 'bg-slate-700/80 border-slate-600';
-    }
+  const stands: ZoneId[] = ['north-stand', 'south-stand', 'east-stand', 'west-stand'];
+  const concourses: ZoneId[] = ['north-concourse', 'south-concourse'];
+  const gates: ZoneId[] = ['gate-a', 'gate-b', 'gate-c', 'gate-d'];
+  const concessions: ZoneId[] = ['concession-n1', 'concession-n2', 'concession-n3', 'concession-s1', 'concession-s2'];
+  const other: ZoneId[] = ['medical-bay', 'vip-lounge'];
+
+  const getStandColor = (id: ZoneId) => {
+    const s = zones[id]?.status ?? 'clear';
+    return STATUS_COLORS[s];
+  };
+
+  const standOpacity = (id: ZoneId) => {
+    const pct = zones[id] ? zones[id].current / zones[id].capacity : 0.3;
+    return 0.25 + pct * 0.55;
   };
 
   return (
-    <div className="flex-1 bg-[#0a0f18] relative overflow-hidden flex items-center justify-center p-8">
-      <div className="relative w-full max-w-[300px] aspect-[3/4] border-4 border-slate-800 rounded-full flex items-center justify-center">
-        <div className="w-1/3 aspect-[1/2] bg-[#2d4a22] border-2 border-[#3f6333] rounded-full z-10 flex items-center justify-center">
-          <div className="w-[10%] h-[40%] bg-[#d2b48c] opacity-80" />
-        </div>
-        <div className={`absolute top-0 w-3/4 h-[15%] rounded-t-full border transition-colors duration-500 flex items-center justify-center group ${getStatusColor(zones['north-stand']?.status)}`} title="North Stand">
-          <span className="text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity">NORTH</span>
-        </div>
-        <div className={`absolute bottom-0 w-3/4 h-[15%] rounded-b-full border transition-colors duration-500 flex items-center justify-center group ${getStatusColor(zones['south-stand']?.status)}`} title="South Stand">
-          <span className="text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity">SOUTH</span>
-        </div>
-        <div className={`absolute right-0 h-3/4 w-[15%] rounded-r-full border transition-colors duration-500 flex items-center justify-center group ${getStatusColor(zones['east-stand']?.status)}`} title="East Stand">
-          <span className="text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity rotate-90">EAST</span>
-        </div>
-        <div className={`absolute left-0 h-3/4 w-[15%] rounded-l-full border transition-colors duration-500 flex items-center justify-center group ${getStatusColor(zones['west-stand']?.status)}`} title="West Stand">
-          <span className="text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity -rotate-90">WEST</span>
-        </div>
+    <div className="flex-1 bg-[#0a0f18] overflow-hidden flex flex-col">
+      {/* Stadium SVG schematic */}
+      <div className="flex-1 flex items-center justify-center px-4 pt-8 pb-2 min-h-0">
+        <svg viewBox="0 0 260 200" className="w-full max-w-[260px]" aria-label="Stadium zone schematic">
+          {/* Outer boundary */}
+          <ellipse cx="130" cy="100" rx="120" ry="90" fill="#0d1520" stroke="#1e293b" strokeWidth="1" />
+
+          {/* North Stand */}
+          <path d="M 50,18 A 120,90 0 0,1 210,18 L 190,38 A 95,68 0 0,0 70,38 Z"
+            fill={getStandColor('north-stand')} fillOpacity={standOpacity('north-stand')}
+            stroke={getStandColor('north-stand')} strokeWidth="1.5" strokeOpacity="0.8" />
+          <text x="130" y="30" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">N STAND</text>
+
+          {/* South Stand */}
+          <path d="M 50,182 A 120,90 0 0,0 210,182 L 190,162 A 95,68 0 0,1 70,162 Z"
+            fill={getStandColor('south-stand')} fillOpacity={standOpacity('south-stand')}
+            stroke={getStandColor('south-stand')} strokeWidth="1.5" strokeOpacity="0.8" />
+          <text x="130" y="178" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">S STAND</text>
+
+          {/* East Stand */}
+          <path d="M 210,18 A 120,90 0 0,1 210,182 L 190,162 A 95,68 0 0,0 190,38 Z"
+            fill={getStandColor('east-stand')} fillOpacity={standOpacity('east-stand')}
+            stroke={getStandColor('east-stand')} strokeWidth="1.5" strokeOpacity="0.8" />
+          <text x="222" y="103" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold" transform="rotate(90,222,103)">E STAND</text>
+
+          {/* West Stand */}
+          <path d="M 50,18 A 120,90 0 0,0 50,182 L 70,162 A 95,68 0 0,1 70,38 Z"
+            fill={getStandColor('west-stand')} fillOpacity={standOpacity('west-stand')}
+            stroke={getStandColor('west-stand')} strokeWidth="1.5" strokeOpacity="0.8" />
+          <text x="38" y="103" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold" transform="rotate(-90,38,103)">W STAND</text>
+
+          {/* Pitch (inner oval) */}
+          <ellipse cx="130" cy="100" rx="55" ry="42" fill="#1a3a1a" stroke="#2d5a2d" strokeWidth="1" />
+          {/* Pitch crease */}
+          <ellipse cx="130" cy="100" rx="38" ry="28" fill="none" stroke="#3f6333" strokeWidth="0.5" strokeDasharray="3,2" />
+          {/* Wickets */}
+          <rect x="127" y="82" width="6" height="2" fill="#c8a96e" rx="0.5" />
+          <rect x="127" y="116" width="6" height="2" fill="#c8a96e" rx="0.5" />
+          <text x="130" y="103" textAnchor="middle" fill="#4a7a4a" fontSize="5" fontWeight="bold">PITCH</text>
+
+          {/* Gate dots */}
+          <circle cx="130" cy="10" r="4" fill={getStandColor('gate-a')} fillOpacity="0.9" />
+          <text x="130" y="9" textAnchor="middle" fill="white" fontSize="4.5" fontWeight="bold">A</text>
+          <circle cx="248" cy="100" r="4" fill={getStandColor('gate-b')} fillOpacity="0.9" />
+          <text x="248" y="101.5" textAnchor="middle" fill="white" fontSize="4.5" fontWeight="bold">B</text>
+          <circle cx="130" cy="190" r="4" fill={getStandColor('gate-c')} fillOpacity="0.9" />
+          <text x="130" y="191.5" textAnchor="middle" fill="white" fontSize="4.5" fontWeight="bold">C</text>
+          <circle cx="12" cy="100" r="4" fill={getStandColor('gate-d')} fillOpacity="0.9" />
+          <text x="12" y="101.5" textAnchor="middle" fill="white" fontSize="4.5" fontWeight="bold">D</text>
+
+          {/* Medical bay dot */}
+          <circle cx="88" cy="58" r="3.5" fill={getStandColor('medical-bay')} fillOpacity="0.9" />
+          <text x="88" y="59.5" textAnchor="middle" fill="white" fontSize="3.5" fontWeight="bold">MED</text>
+
+          {/* VIP dot */}
+          <circle cx="172" cy="58" r="3.5" fill={getStandColor('vip-lounge')} fillOpacity="0.9" />
+          <text x="172" y="59.5" textAnchor="middle" fill="white" fontSize="3.5" fontWeight="bold">VIP</text>
+        </svg>
       </div>
-      <div className="absolute bottom-4 left-4 bg-[#1E293B]/80 backdrop-blur border border-slate-700 p-2 rounded text-[10px] flex flex-col gap-1">
-        <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-green-500"></div> Clear</div>
-        <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-amber-500"></div> Moderate</div>
-        <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-orange-500"></div> Busy</div>
-        <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-red-500"></div> Critical</div>
+
+      {/* Zone data grid */}
+      <div className="px-3 pb-3 flex flex-col gap-2 overflow-y-auto">
+        <div className="grid grid-cols-2 gap-1.5">
+          {stands.map(id => zones[id] && <ZoneChip key={id} zone={zones[id]} />)}
+        </div>
+        <div className="grid grid-cols-2 gap-1.5">
+          {concourses.map(id => zones[id] && <ZoneChip key={id} zone={zones[id]} />)}
+          {gates.map(id => zones[id] && <ZoneChip key={id} zone={zones[id]} />)}
+        </div>
+        <div className="grid grid-cols-3 gap-1.5">
+          {concessions.map(id => zones[id] && <ZoneChip key={id} zone={zones[id]} />)}
+          {other.map(id => zones[id] && <ZoneChip key={id} zone={zones[id]} />)}
+        </div>
       </div>
     </div>
   );
