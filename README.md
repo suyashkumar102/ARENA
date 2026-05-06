@@ -51,34 +51,3 @@ The result: 85–91% prediction confidence at 10 minutes ahead.
 B2B SaaS. Licensed per event to venue operators.  
 Estimated TAM: 500+ large-capacity venues in India alone.
 
-## Built With
-
-- **Next.js 14** — App Router, Server Components, API Routes
-- **TypeScript** — Strict mode, fully typed
-- **Firebase** — Realtime Database, Auth, Cloud Messaging
-- **Google Gemini 2.0 Flash** — AI briefings and fan assistant
-- **Google Maps JS API** — Interactive venue zone overlay
-- **Google Cloud Run** — Containerised deployment
-- **Google Analytics 4** — Usage analytics
-- **Tailwind CSS** — Utility-first styling
-- **Framer Motion** — Animations
-- **Zod** — Runtime schema validation
-- **Jest + React Testing Library** — Unit and component tests
-
-## Roadmap
-
-- [x] Real-time zone heatmap with Google Maps polygon overlay
-- [x] Match-aware crowd prediction engine (85–91% confidence)
-- [x] Gemini AI operational briefings (auto-refresh every 2 min)
-- [x] Cascade action builder with modal confirmation
-- [x] Firebase Auth operator login with demo credentials
-- [x] Fan PWA with service worker offline support
-- [x] FCM push notifications to fans by zone
-- [x] Incident reporting with Firebase persistence
-- [x] Queue panel with overflow staff deployment
-- [x] Google Analytics 4 integration
-- [ ] Multi-venue support (Wankhede, Eden Gardens, Chepauk)
-- [ ] Historical pattern learning from past matches
-- [ ] IoT sensor integration for real occupancy data
-- [ ] Native mobile app (React Native)
-- [ ] Automated cascade triggers on match events
